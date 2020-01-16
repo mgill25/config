@@ -1,0 +1,91 @@
+/*
+tabs to bottom
+source: https://gist.github.com/Arty2/e6e61801531ec5ee1f9f
+*/
+
+/* bring the browser window to the top */
+#browser {
+	-moz-box-ordinal-group: 0 !important;
+	padding-top: 8px;
+}
+
+/* alternative: move the toolbar to the bottom; */
+/*#appMenu-viewCache + box {
+	-moz-box-ordinal-group: 2 !important;
+}*/
+
+/* hide tab toolbar when fullscreen */
+/*#nav-bar[inFullscreen],
+#TabsToolbar[inFullscreen] {
+	display: none;
+}*/
+
+
+/* hide titlebar buttons */
+#TabsToolbar > .titlebar-buttonbox-container {
+	display: none !important;
+}
+
+.urlbarView {
+        top: unset !important;
+        bottom: 69px !important;
+        box-shadow: none !important;
+}
+
+/* Show sidebar only when the cursor is over it  */
+/* The border controlling sidebar width will be removed so you'll need to modify these values to change width */
+
+#sidebar-box{
+  --uc-sidebar-width: 40px;
+  --uc-sidebar-hover-width: 270px;
+  position: relative;
+  min-width: var(--uc-sidebar-width) !important;
+  width: var(--uc-sidebar-width) !important;
+  max-width: var(--uc-sidebar-width) !important;
+  z-index:1;
+}
+
+#sidebar-box[positionend]{ direction: rtl }
+#sidebar-box[positionend] > *{ direction: ltr }
+
+#sidebar-box[positionend]:-moz-locale-dir(rtl){ direction: ltr }
+#sidebar-box[positionend]:-moz-locale-dir(rtl) > *{ direction: rtl }
+
+#main-window[sizemode="fullscreen"] #sidebar-box{ --uc-sidebar-width: 1px; }
+
+#sidebar-splitter{ display: none }
+
+#sidebar-header{ overflow: hidden; color: var(--chrome-color, inherit) !important}
+
+#sidebar{
+  transition: min-width 115ms linear !important;
+  min-width: var(--uc-sidebar-width) !important;
+  will-change: min-width;
+}
+
+#sidebar-box:hover > #sidebar{ min-width: var(--uc-sidebar-hover-width) !important; }
+
+.sidebar-panel{
+  background-color: transparent !important;
+  color: var(--newtab-text-primary-color) !important;
+}
+
+.sidebar-panel #search-box{
+  -moz-appearance: none !important;
+  background-color: rgba(249,249,250,0.1) !important; 
+  color: inherit !important;
+}
+
+/* Add sidebar divider and give it background */
+
+#sidebar,
+#sidebar-header{
+  background-color: var(--toolbar-bgcolor) !important;
+  border-inline: 1px solid rgb(80,80,80);
+  border-inline-width: 0px 1px;
+}
+
+#sidebar-box:not([positionend]) > :-moz-locale-dir(rtl),
+#sidebar-box[positionend] > *{
+  border-inline-width: 1px 0px;
+}
